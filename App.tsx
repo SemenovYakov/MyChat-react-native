@@ -1,30 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootNavigator} from './navigation/root';
-import {retrieveUserSession} from './tokens/encrypto';
+
+import SplashScreen from 'react-native-splash-screen';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {refreshToken} from './tokens/encrypto';
+import {checkAuth} from './src/components/functions/check-auth';
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
-  const checkAuth = async () => {
-    const token = await retrieveUserSession();
-
-    if (!token) {
-      setIsLoggedIn(false);
+  useEffect(() => {
+    const token = EncryptedStorage.getItem(refreshToken);
+    if (token) {
+      checkAuth(token, setIsLoggedIn);
     } else {
-      setIsLoggedIn(true);
+      setIsLoggedIn(false);
     }
-    console.log(token);
-
-    // if (token) {
-    //   const valid = await verifyTokenAsync({token});
-
-    //   setIsLoggedIn(!!valid);
-    // }
-  };
+  }, []);
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    if (isLoggedIn !== null) {
+      SplashScreen.hide();
+    }
+  }, [isLoggedIn]);
 
   return (
     <NavigationContainer>
