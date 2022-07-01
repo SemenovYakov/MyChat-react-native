@@ -6,16 +6,19 @@ interface IData {
 }
 
 export const login = async (data: IData) => {
-  const response = await fetch('http://localhost:4000/auth/login', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  try {
+    const response = await fetch('http://192.168.1.139:4000/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  const responseJSON = await response.json();
-  console.log(responseJSON.accessToken);
+    const responseJSON = await response.json();
 
-  await storeUserSession(responseJSON.accessToken);
+    await storeUserSession(responseJSON.accessToken, responseJSON.refreshToken);
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -9,7 +9,7 @@ import {
   SubmitButton,
 } from './registration-screen';
 import {login} from '../components/functions/login';
-
+import {colors} from '../../theme/colors';
 interface ValuesProps {
   email: string;
   password: string;
@@ -37,12 +37,14 @@ export const AuthScreen = () => {
           <FormikView>
             <CustomInput
               placeholder="Email"
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
               value={values.email}
             />
             <CustomInput
               placeholder="Пароль"
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}

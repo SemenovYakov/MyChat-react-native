@@ -1,29 +1,19 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export const userSession = 'user_session';
+export const accessToken = 'access';
+export const refreshToken = 'refresh';
 
-export async function storeUserSession(token: string) {
+export async function storeUserSession(access: string, refresh: string) {
   try {
-    await EncryptedStorage.setItem(userSession, token);
-  } catch (error) {}
-}
-
-export async function retrieveUserSession() {
-  try {
-    const session = await EncryptedStorage.getItem(userSession);
-
-    return session;
-  } catch (error) {}
-}
-
-export async function removeUserSession() {
-  try {
-    await EncryptedStorage.removeItem(userSession);
+    await EncryptedStorage.setItem(accessToken, access);
+    await EncryptedStorage.setItem(refreshToken, refresh);
   } catch (error) {}
 }
 
 export async function clearStorage() {
   try {
     await EncryptedStorage.clear();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }

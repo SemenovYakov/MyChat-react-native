@@ -1,21 +1,16 @@
-import {removeUserSession, storeUserSession} from '../../../tokens/encrypto';
+import {clearStorage} from '../../../tokens/encrypto';
 
-// interface IData {
-//   email: string;
-//   password: string;
-// }
-
-export const logout = async () => {
-  //   const response = await fetch('http://localhost:4000/auth/login', {
-  //     method: 'POST',
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-
-  //   const responseJSON = await response.json();
-  //   console.log(responseJSON.accessToken);
-
-  await removeUserSession();
+export const logout = async (refreshToken: any) => {
+  try {
+    await fetch('http://192.168.1.139:4000/auth/logout', {
+      method: 'POST',
+      body: JSON.stringify(refreshToken),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  await clearStorage();
 };

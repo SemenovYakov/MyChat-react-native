@@ -42,31 +42,35 @@ export const RegistrationScreen = () => {
           <FormikView>
             <CustomInput
               placeholder="Имя"
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('firstname')}
               onBlur={handleBlur('firstname')}
               value={values.firstname}
             />
             <CustomInput
               placeholder="Фамилия"
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('lastname')}
               onBlur={handleBlur('lastname')}
               value={values.lastname}
             />
             <CustomInput
               placeholder="Возраст"
-    
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('age')}
               onBlur={handleBlur('age')}
               value={String(values.age)}
             />
             <CustomInput
               placeholder="Email"
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
               value={values.email}
             />
             <CustomInput
               placeholder="Пароль"
+              placeholderTextColor={colors.lightgray}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
@@ -89,6 +93,7 @@ export const MainContainer = styled(SafeAreaView)`
   align-items: center;
 `;
 export const CustomInput = styled.TextInput`
+  color: ${colors.black};
   width: 100%;
   height: 50px;
   border-radius: 4px;
